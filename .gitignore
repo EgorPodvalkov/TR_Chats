@@ -128,3 +128,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#file with telegram api and email password
+telegramBotAPI.py
+emailData.py
