@@ -5,14 +5,11 @@ Main functions are send_verification_code_telegram and run_telegram_bot
 # other libs
 from telebot import TeleBot
 from telegram.constants import ParseMode
-from rich.console import Console
-from threading import Thread
+from os import environ
 # my lisbs
-from telegramBotAPI import API
+from myCommonFeatures import log
 
-bot = TeleBot(API)
-log = Console().log
-
+bot = TeleBot(environ.get("BOT_TELEGRAM_API"))
 
 @bot.message_handler(commands=['start'])
 def send_id(message):

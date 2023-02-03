@@ -130,5 +130,4 @@ dmypy.json
 .pyre/
 
 #file with telegram api and email password
-telegramBotAPI.py
-emailData.py
+.env
