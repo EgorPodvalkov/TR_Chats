@@ -8,14 +8,28 @@ header{
     border-bottom: 1px solid rgb(112, 112, 112);
 }
 header-shadow{
-    background-color: rgba(120, 124, 124, 0.671);
+    background-color: rgba(7, 7, 7, 0.8);
     position: absolute;
     top: 81px;
     left: 0px;
     right: 0px;
-    height: 2px;
+    height: 3px;
 }
-header > img{
-    margin-left: 25px;
+header > img.logo{
+    margin-left: 15px;
+    margin-top: 20px;
+    height: 40px;
 }
-	
+header > img.settings{
+    float: right;
+    margin-right: 1.5vw;
+    margin-top: 15px;
+    height: 50px;
+}
+header > img.avatar{
+    float: right;
+    margin-right: 1.5vw;
+    margin-top: 10px;
+    height: 60px;
+    border-radius: 30px;
+}
