@@ -35,4 +35,19 @@ def get_resource():
         return generateResponse("")
 
 
+@app.route("/avatar")
+def get_avatar():
+    '''Gives avatars to server'''
+    file_name = request.args.get("name")
+    file_path = path + "resources\\avatars\\" + file_name
+
+    try:
+        resource = send_file(file_path)
+        log(f"Avatar [green]{file_name}[/green] is loaded! ")
+        return resource
+    except:
+        log(f"Avatar [red]{file_name}[/red] not founded :(")
+        return generateResponse("")
+    
+
 app.run(host="0.0.0.0", port=8080, debug=True)

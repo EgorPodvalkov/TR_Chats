@@ -5,16 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TR Chat</title>
-    <link rel="stylesheet" href = "/resource?name=header.css"></style>
+    <!-- Styles -->
     <link rel="stylesheet" href = "/resource?name=index.css"></style>
-    
+    <link rel="stylesheet" href = "/resource?name=header_and_logger.css"></style>
+    <!-- Scripts -->
+    <script src="/resource?name=header_and_logger.js"></script>
 </head>
 <body>
-   <header>
-        <img class="logo" src = "/resource?name=logo_without_background.png" alt="logo" >
-        <img class="settings" src="/resource?name=settings.png" alt="settings"> 
-        <img class="avatar" src="/resource?name=default_avatar2.png" alt="settings"> 
-   </header> <header-shadow></header-shadow>
-   fsd
+    <header-shadow></header-shadow><header>
+        <a href="/">
+            <img class="logo" src = "/resource?name=logo_without_background.png" alt="logo">
+        </a>
+        <img class="avatar" id = "avatar_in_header" src="/avatar?name=default_avatar2.png" alt="avatar" onclick="show_acc_panel()">
+        <div class="buttons" id = "log_in_buttons">
+            <input class="log" type="button" value="Log in">
+            <input class="sign" type="button" value="Sign up">
+        </div>
+        <div class="acc_panel">
+            <input class="with_bottom_border" type="button" value="Profile">
+            <input class="with_bottom_border" type="button" value="Notification">
+            <input type="button" value="Log Out">
+        </div>
+   </header>
+   <div class="test">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Dignissimos excepturi consequuntur iure quam voluptatem! 
+        Similique, pariatur assumenda doloribus quia aut non, quos et 
+        consectetur eos, voluptates tenetur odio cumque vitae!
+    </div>
+   
+
+    <loginer>
+        <button onclick=""></button>
+        <div>
+            <h2>Log in</h2>
+        </div>
+    </loginer>
+    <registrator>
+
+    </registrator>
 </body>
 </html>

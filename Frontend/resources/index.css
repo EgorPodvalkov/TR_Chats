@@ -4,6 +4,8 @@ body{
     background:  rgb(30, 31, 31);
     color: rgb(241, 255, 40);
 }
-div {
-    height: 30px;
+div.test{
+    width: 400px;
+    border: 1px, solid, red;
+
 }
