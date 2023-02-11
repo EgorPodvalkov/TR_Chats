@@ -27,6 +27,7 @@ header > img.avatar{
     margin-top: 10px;
     height: 60px;
     border-radius: 30px;
+    display: none;
 }
 header > div.buttons{
     float: right;
@@ -34,7 +35,7 @@ header > div.buttons{
     margin-top: 16px;
     height: 60px;
     border-radius: 30px;
-    display: none;
+    display: inline;
 }
 header > div.buttons > input.log, header > div.buttons > input.sign{
     background-color: rgb(28, 29, 29);
@@ -67,11 +68,12 @@ header > div.acc_panel > input.with_bottom_border{
     border-bottom: 1px solid black;
 }
 
-loginer{
-    display: inline;
-    --panel-width: 650px
+
+.loginer, .registrator{
+    --panel-width: 500px;
+    display: none;
 }
-loginer > button, registrator > button{
+.loginer > button, .registrator > button{
     position: absolute;
     top: 0;
     bottom: 0;
@@ -80,7 +82,7 @@ loginer > button, registrator > button{
     border: 0;
     background-color: rgba(37, 37, 37, 0.5);
 }
-loginer > div{
+.loginer > div, .registrator > div{
     position: absolute;
     color: black;
     top: 100px;
@@ -90,7 +92,60 @@ loginer > div{
     border-radius: 15px;
 
 }
-loginer > div > h2{
-    margin-top: 5px;
+.loginer > div > h2, .registrator > div > h2{
+    margin-top: 8px;
+    height: 35px;
     text-align: center; 
+    border-bottom: 1px solid rgba(29, 29, 29, 0.4);
 }
+.field_name{
+    margin-left: 26px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+.field{
+    margin-left: 20px;
+    width: calc(var(--panel-width) - 45px);
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgba(29, 29, 29, 0.4);
+    border-radius: 5px;
+}
+.registrator > div > button{
+    margin-left: 20px;
+    font-size: medium;
+    font-weight: bold;
+    width: 191px;
+    background-color: rgb(228, 228, 228);
+    border: 1px solid rgba(29, 29, 29, 0.4);
+    border-radius: 5px;
+}
+.field_name > note{
+    font-weight: normal;
+    font-size: small;
+}
+.get_code{
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: smaller;
+    font-weight: bold;
+    background-color: rgb(228, 228, 228);
+    border: 1px solid rgba(29, 29, 29, 0.4);
+    border-radius: 5px;
+
+}
+.final_button{
+    font-size: larger;
+    width: 300px;
+    margin-left: calc(var(--panel-width) / 2 - 150px);
+    font-weight: bold;
+    background-color: rgb(228, 228, 228);
+    border: 1px solid rgba(29, 29, 29, 0.4);
+    border-radius: 5px;
+}
+.telegram_sign_up, .email_sign_up{
+    display: none;
+}
+/* .registrator,.telegram_sign_up{
+
+    display: inline;
+} */

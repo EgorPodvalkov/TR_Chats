@@ -3,6 +3,7 @@ body{
     margin-left: 15px;
     background:  rgb(30, 31, 31);
     color: rgb(241, 255, 40);
+    font-size: large;
 }
 div.test{
     width: 400px;

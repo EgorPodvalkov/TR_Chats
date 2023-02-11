@@ -7,9 +7,9 @@
     <title>TR Chat</title>
     <!-- Styles -->
     <link rel="stylesheet" href = "/resource?name=index.css"></style>
-    <link rel="stylesheet" href = "/resource?name=header_and_logger.css"></style>
+    <link rel="stylesheet" href = "/resource?name=header_and_loginner.css"></style>
     <!-- Scripts -->
-    <script src="/resource?name=header_and_logger.js"></script>
+    <script src="/resource?name=header_and_loginner.js"></script>
 </head>
 <body>
     <header-shadow></header-shadow><header>
@@ -18,8 +18,8 @@
         </a>
         <img class="avatar" id = "avatar_in_header" src="/avatar?name=default_avatar2.png" alt="avatar" onclick="show_acc_panel()">
         <div class="buttons" id = "log_in_buttons">
-            <input class="log" type="button" value="Log in">
-            <input class="sign" type="button" value="Sign up">
+            <input class="log" type="button" value="Log in" onclick="show_login_panel()">
+            <input class="sign" type="button" value="Sign up" onclick="show_signup_panel()">
         </div>
         <div class="acc_panel">
             <input class="with_bottom_border" type="button" value="Profile">
@@ -35,14 +35,73 @@
     </div>
    
 
-    <loginer>
-        <button onclick=""></button>
+    <div class="loginer">
+        <button onclick="show_login_panel(false)"></button>
         <div>
             <h2>Log in</h2>
+            <h4 class="field_name">Login</h4>
+            <input class="field" type="text">
+            <h4 class="field_name">Password</h4>
+            <input class="field" type="password">
+            <br>
+            <button class="get_code">Get verification code</button>
+            <h4 class="field_name">Verification code
+                <note>(format AB1C2)</note>
+            </h4>
+            <input class="field" type="text">
+            <br><br>
+            <button class="final_button">Log in</button>
+            <br><br>
         </div>
-    </loginer>
-    <registrator>
+    </div>
+    <div class="registrator">
+        <button onclick="show_signup_panel(false)"></button>
+        <div>
+            <h2>Sign up</h2>
+            <h4 class="field_name">Login</h4>
+            <input class="field" type="text">
+            <h4 class="field_name">NickName</h4>
+            <input class="field" type="text">
+            <h4 class="field_name">Password</h4>
+            <input class="field" type="password">
+            <h4 class="field_name">Confirm password</h4>
+            <input class="field" type="password">
+            <br><br>
+            <button onclick="show_telegram_verif()">Sign up with Telegram</button>
+            <button onclick="show_email_verif()">Sign up with Email</button>
+            
+            <div class="telegram_sign_up">
+                <h4 class="field_name">Authentication code
+                <note>
+                    (You can use
+                    <a href="https://t.me/TR_chat_Authentication_bot" target="_blank">my bot</a>
+                    for getting it (format 123456789))
+                </note>
+                </h4>
+                <input class="field" type="text">
+                <button class="get_code">Get verification code</button>
+                <h4 class="field_name">Verification code
+                    <note>(format AB1C2)</note>
+                </h4>
+                <input class="field" type="text">
+                <br><br><br>
+                <button class="final_button">Create an account</button>
+            </div>  
+            
+            <div class="email_sign_up">
+                <h4 class="field_name">Email</h4>
+                <input class="field" type="text"> 
+                <button class="get_code">Get verification code</button>
+                <h4 class="field_name">Verification code
+                    <note>(format AB1C2)</note>
+                </h4>
+                <input class="field" type="text">
+                <br><br><br>
+                <button class="final_button">Create an account</button>
+            </div>
+            <br><br>
+        </div>
 
-    </registrator>
+    </div>
 </body>
 </html>
