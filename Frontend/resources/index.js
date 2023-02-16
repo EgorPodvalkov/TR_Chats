@@ -11,13 +11,16 @@ function show_workplaces_adder(bool = true){
         document.getElementsByClassName("adder_workplace")[0].style = "display: none;"
     }
 }
+function scrollToBottom(){
+    element = document.getElementsByClassName("messages")[0]
+    element.scrollTop = element.scrollHeight
+}
+
+scrollToBottom()
 
 
 
 
 
 
-
-
-
-setTimeout(() => {location.reload()}, 1000)
+// setTimeout(() => {location.reload()}, 1000)

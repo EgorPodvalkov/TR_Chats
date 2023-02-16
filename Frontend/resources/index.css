@@ -158,8 +158,40 @@ div.chat > h3{
 }
 div.chat > .chat_area{
     height: calc(100% - 51px - 60px);
-
+    color: white;
+    font-size: larger;
 }
+.messages{
+    position: absolute;
+    bottom: 65px;
+    left: 8px;
+    right: 0;
+    max-height: calc(100% - 60px - 55px);
+    overflow-y: scroll;
+}
+.messages::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(23, 23, 23, 0.3);
+}
+.messages::-webkit-scrollbar-thumb {
+    background: yellow;
+    border-radius: 5px;
+}
+.messages > name{
+    font-weight: bold;
+    font-size: large;
+    color: rgba(242, 255, 53, 0.9);
+    padding-left: 7px;
+}
+.messages > time{
+    font-size: xx-small;
+    color: rgba(200, 200, 200, 0.4);
+}
+.messages > text{
+    font-size: medium;
+    padding-left: 15px;
+}
+
 div.chat > .send_area{
     height: 57px;    
     background-color: rgb(24, 24, 24);
