@@ -84,11 +84,11 @@ header > div.acc_panel > input.with_bottom_border{
 }
 .loginer > div, .registrator > div{
     position: absolute;
-    color: black;
+    color: rgb(241, 255, 40);
     top: 100px;
     left: calc(50vw - var(--panel-width)/2);
     width: var(--panel-width);    
-    background-color: antiquewhite;
+    background-color: rgb(46, 46, 46);
     border-radius: 15px;
 
 }
@@ -106,8 +106,9 @@ header > div.acc_panel > input.with_bottom_border{
 .field{
     margin-left: 20px;
     width: calc(var(--panel-width) - 45px);
-    background-color: rgb(240, 240, 240);
-    border: 1px solid rgba(29, 29, 29, 0.4);
+    background-color: rgb(63, 63, 63);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40, 0.4);
     border-radius: 5px;
 }
 .registrator > div > button{
@@ -115,8 +116,9 @@ header > div.acc_panel > input.with_bottom_border{
     font-size: medium;
     font-weight: bold;
     width: 191px;
-    background-color: rgb(228, 228, 228);
-    border: 1px solid rgba(29, 29, 29, 0.4);
+    background-color: rgb(63, 63, 63);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40, 0.7);
     border-radius: 5px;
 }
 .field_name > note{
@@ -128,8 +130,9 @@ header > div.acc_panel > input.with_bottom_border{
     margin-top: 10px;
     font-size: smaller;
     font-weight: bold;
-    background-color: rgb(228, 228, 228);
-    border: 1px solid rgba(29, 29, 29, 0.4);
+    background-color: rgb(63, 63, 63);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40, 0.7);
     border-radius: 5px;
 
 }
@@ -138,8 +141,9 @@ header > div.acc_panel > input.with_bottom_border{
     width: 300px;
     margin-left: calc(var(--panel-width) / 2 - 150px);
     font-weight: bold;
-    background-color: rgb(228, 228, 228);
-    border: 1px solid rgba(29, 29, 29, 0.4);
+    background-color: rgb(63, 63, 63);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40, 0.7);
     border-radius: 5px;
 }
 .telegram_sign_up, .email_sign_up{

@@ -64,4 +64,3 @@ function show_email_verif(){
     document.getElementsByClassName("email_sign_up")[0].style = "display: inline;";
     document.getElementsByClassName("telegram_sign_up")[0].style = "display: none;";
 }
-// setTimeout(() => {location.reload()}, 1000)

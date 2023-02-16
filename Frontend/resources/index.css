@@ -1,12 +1,86 @@
 body{
-    margin-top: 90px;
-    margin-left: 15px;
     background:  rgb(30, 31, 31);
     color: rgb(241, 255, 40);
     font-size: large;
 }
-div.test{
-    width: 400px;
-    border: 1px, solid, red;
+/* workplaces */
+div.workplaces{
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    right: calc(100vw - 200px);
+    background-color: rgb(38, 39, 39);
+    border-right: 3px solid rgba(23, 23, 23, 0.8);
+}
+div.workplaces > h2{
+    text-align:center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+button.add_workplace{
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40);
+    border-radius: 7px;
+}
+.workplaces_area{
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 2px solid rgba(255, 255, 61, 0.9);
+    background-color: rgb(30, 31, 31);
+}
+.workplaces_area > button{
+    background-color: rgb(0, 0, 0, 0);
+    color: rgb(241, 255, 40);
+    text-align: left;
+    padding: 4.5px;
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: large;
 
+    width: 200px;
+    border: 0;
+    border-bottom: 1px solid rgba(211, 224, 37, 0.8);
+}
+.workplaces_area::-webkit-scrollbar {
+    width: 5px;
+    background: rgba(23, 23, 23, 0.8);
+}
+.workplaces_area::-webkit-scrollbar-thumb {
+    background: yellow;
+    border-radius: 3px;
+}
+/* adder_workplace */
+.adder_workplace{
+    --panel-width: 400px;
+    display: none;
+}
+.bg_close_button{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    background-color: rgba(37, 37, 37, 0.5);
+}
+.adder_workplace > div{
+    position: absolute;
+    color: rgb(241, 255, 40);
+    top: 150px;
+    left: calc(50vw - var(--panel-width)/2);
+    width: var(--panel-width);    
+    background-color: rgb(46, 46, 46);
+    border-radius: 15px;
+}
+.adder_workplace > div > h2{
+margin-top: 8px;
+height: 35px;
+text-align: center; 
+border-bottom: 1px solid rgba(29, 29, 29, 0.4);
 }

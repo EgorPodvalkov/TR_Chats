@@ -8,10 +8,55 @@
     <!-- Styles -->
     <link rel="stylesheet" href = "/resource?name=index.css"></style>
     <link rel="stylesheet" href = "/resource?name=header_and_loginner.css"></style>
-    <!-- Scripts -->
-    <script src="/resource?name=header_and_loginner.js"></script>
 </head>
 <body>
+    <!-- workplaces -->
+    <div class="workplaces">
+        <h2>
+            Workplaces
+            <button onclick="show_workplaces_adder()" class="add_workplace" >+</button>
+        </h2>
+        <div class="workplaces_area">
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius mollitia esse, doloremque eligendi unde at nobis, dolor saepe quidem, facere quibusdam repellendus blanditiis doloribus soluta quae repudiandae odit alias. Ea.</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button>any name</button>
+            <button onclick="addSomeThingToWorkplaces()">add</button>
+        </div>
+    </div>
+    <!-- chanels -->
+    <div class="channels">
+
+    </div>
+
+    <div class="chat"></div>
+   
+    <!-- header -->
     <header-shadow></header-shadow><header>
         <a href="/">
             <img class="logo" src = "/resource?name=logo_without_background.png" alt="logo">
@@ -27,15 +72,8 @@
             <input type="button" value="Log Out">
         </div>
    </header>
-   <div class="test">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Dignissimos excepturi consequuntur iure quam voluptatem! 
-        Similique, pariatur assumenda doloribus quia aut non, quos et 
-        consectetur eos, voluptates tenetur odio cumque vitae!
-    </div>
-   
-
-    <div class="loginer">
+    <!-- loginer -->
+   <div class="loginer">
         <button onclick="show_login_panel(false)"></button>
         <div>
             <h2>Log in</h2>
@@ -54,6 +92,7 @@
             <br><br>
         </div>
     </div>
+    <!-- registrator -->
     <div class="registrator">
         <button onclick="show_signup_panel(false)"></button>
         <div>
@@ -74,7 +113,7 @@
                 <h4 class="field_name">Authentication code
                 <note>
                     (You can use
-                    <a href="https://t.me/TR_chat_Authentication_bot" target="_blank">my bot</a>
+                    <a style="color: white;" href="https://t.me/TR_chat_Authentication_bot" target="_blank">my bot</a>
                     for getting it (format 123456789))
                 </note>
                 </h4>
@@ -103,5 +142,20 @@
         </div>
 
     </div>
+    <!-- workplace adder -->
+    <div class="adder_workplace">
+        <button onclick="show_workplaces_adder(false)" class="bg_close_button"></button>
+        <div>
+            <h2>Create new workplace</h2>
+            <h4 class="field_name">Unique workplace name</h4>
+            <input class="field" type="text">
+            <br><br><br>
+            <button class="final_button">Create</button>
+            <br><br>
+        </div>
+    </div>
 </body>
+<!-- Scripts -->
+<script src="/resource?name=index.js"></script>
+<script src="/resource?name=header_and_loginner.js"></script>
 </html>
