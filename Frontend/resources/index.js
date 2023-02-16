@@ -1,9 +1,8 @@
-function addSomeThingToWorkplaces(){
+function add_workplace(name = "New Workplace"){
     workplace = document.getElementsByClassName("workplaces_area")[0];
-    workplace.innerHTML += "<button>new workplace</button>"
+    workplace.innerHTML += "<button>" + name + "</button>";
 }
-addSomeThingToWorkplaces()
-
+add_workplace("Test")
 function show_workplaces_adder(bool = true){
     if(bool){
         document.getElementsByClassName("adder_workplace")[0].style = "display: inline;"
@@ -21,4 +20,4 @@ function show_workplaces_adder(bool = true){
 
 
 
-// setTimeout(() => {location.reload()}, 1000)
+setTimeout(() => {location.reload()}, 1000)

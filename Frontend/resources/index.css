@@ -3,6 +3,7 @@ body{
     color: rgb(241, 255, 40);
     font-size: large;
 }
+
 /* workplaces */
 div.workplaces{
     position: absolute;
@@ -28,7 +29,7 @@ button.add_workplace{
     border-radius: 7px;
 }
 .workplaces_area{
-    height: calc(100vh - 130px);
+    height: calc(100vh - 129px);
     overflow-y: auto;
     overflow-x: hidden;
     border-top: 2px solid rgba(255, 255, 61, 0.9);
@@ -36,7 +37,7 @@ button.add_workplace{
 }
 .workplaces_area > button{
     background-color: rgb(0, 0, 0, 0);
-    color: rgb(241, 255, 40);
+    color: rgb(255, 255, 237);
     text-align: left;
     padding: 4.5px;
     padding-left: 11px;
@@ -55,6 +56,7 @@ button.add_workplace{
     background: yellow;
     border-radius: 3px;
 }
+
 /* adder_workplace */
 .adder_workplace{
     --panel-width: 400px;
@@ -83,4 +85,100 @@ margin-top: 8px;
 height: 35px;
 text-align: center; 
 border-bottom: 1px solid rgba(29, 29, 29, 0.4);
+}
+
+/* chanels */
+div.channels{
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    left: 200px;
+    right: calc(100vw - 380px);
+    background-color: rgb(53, 53, 53);
+    border-right: 3px solid rgb(23, 23, 23);
+}
+div.channels > h3{
+    text-align: center;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+button.add_channel{
+    margin-left: 5px;
+    width: 22px;
+    height: 22px;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40);
+    border-radius: 7px;
+}
+.channels_area{
+    height: calc(100vh - 123px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 1px solid rgba(255, 255, 61, 0.9);
+    background-color: rgb(37, 37, 37);
+}
+.channels_area > button{
+    background-color: rgb(0, 0, 0, 0);
+    color: rgb(236, 236, 190);
+    text-align: left;
+    padding: 3.5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: smaller;
+    width: 180px;
+    border: 0;
+    border-bottom: 1px solid rgba(211, 224, 37, 0.8);
+}
+.channels_area::-webkit-scrollbar {
+    width: 4px;
+    background: rgba(23, 23, 23, 0.8);
+}
+.channels_area::-webkit-scrollbar-thumb {
+    background: yellow;
+    border-radius: 3px;
+}
+/* Chat */
+div.chat{
+    position: absolute;
+    top: 80px;
+    bottom: 0;
+    left: 380px;
+    right: 0;
+    background-color: rgb(37, 37, 37);
+}
+div.chat > h3{
+    font-weight: normal;
+    margin: 0;
+    padding: 14px;
+    padding-bottom: 8px;
+    background-color: rgb(32, 32, 32);
+    border-bottom: 3px solid rgb(27, 27, 27);
+}
+div.chat > .chat_area{
+    height: calc(100% - 51px - 60px);
+
+}
+div.chat > .send_area{
+    height: 57px;    
+    background-color: rgb(24, 24, 24);
+    border-top: 3px solid rgb(19, 18, 18, 0.8);
+}
+div.chat > .send_area > input{
+    margin-top: 20px;
+    margin-left: 15px;
+    width: calc(100% - 85px);
+    height: 20px;
+    background-color: rgb(70, 70, 70);
+    color: white;
+    border: 0;
+    border-radius: 8px;
+}
+div.chat > .send_area > button{
+    position: absolute;
+    right: 10px;
+    margin-top: 10px;
+    background-color: transparent;
+    border: 0;
 }
