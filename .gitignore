@@ -135,3 +135,6 @@ dmypy.json
 
 #my workspace
 *.code-workspace
+
+# data storages
+*.db
