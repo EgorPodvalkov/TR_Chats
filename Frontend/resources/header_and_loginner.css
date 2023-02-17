@@ -69,9 +69,13 @@ header > div.acc_panel > input.with_bottom_border{
 }
 
 
-.loginer, .registrator{
+.loginer{
     --panel-width: 500px;
     display: none;
+}
+.registrator{
+    --panel-width: 500px;
+    display: inline;
 }
 .loginer > button, .registrator > button{
     position: absolute;
@@ -97,6 +101,13 @@ header > div.acc_panel > input.with_bottom_border{
     height: 35px;
     text-align: center; 
     border-bottom: 1px solid rgba(29, 29, 29, 0.4);
+}
+.field_name > err{
+    margin-left: 10px;
+    color: rgba(255, 31, 11, 0.8);
+    font-size: small;
+    font-weight: normal;
+
 }
 .field_name{
     margin-left: 26px;
@@ -149,6 +160,12 @@ header > div.acc_panel > input.with_bottom_border{
 .telegram_sign_up, .email_sign_up{
     display: none;
 }
+.telegram_sign_up > status, .email_sign_up > status{
+    color: rgb(0, 230, 0);
+    margin-left: 10px;
+    font-size: medium;
+}
+
 /* .registrator,.telegram_sign_up{
 
     display: inline;

@@ -1,4 +1,4 @@
-"""Main module that launch webserver based on Flask"""
+"""Main module that launch webserver for frontend based on Flask"""
 # other libs
 from flask import Flask, render_template, request, send_file, make_response
 # my libs
@@ -7,7 +7,7 @@ from myCommonFeatures import log, path
 app = Flask("TR chat front")
 
 
-def generateResponse(data):
+def generateResponse(data = ""):
     """Returns response with data"""
     response = make_response(data)
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -32,7 +32,7 @@ def get_resource():
         return resource
     except:
         log(f"File [red]{file_name}[/red] not founded :(")
-        return generateResponse("")
+        return generateResponse()
 
 
 @app.route("/avatar")
@@ -47,7 +47,7 @@ def get_avatar():
         return resource
     except:
         log(f"Avatar [red]{file_name}[/red] not founded :(")
-        return generateResponse("")
+        return generateResponse()
     
 
 app.run(host="0.0.0.0", port=8080, debug=True)

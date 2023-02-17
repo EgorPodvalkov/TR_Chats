@@ -58,10 +58,6 @@ def addUser(nameDB: str, login: str, nickname: str, password: str, authenticatio
         cursor = connection.cursor()
         cursor.execute(sql)
         connection.commit()
-        sql = f"INSERT INTO verification(`authentication_name`) VALUES('{authentication_name}')"
-        cursor = connection.cursor()
-        cursor.execute(sql)
-        connection.commit()
         connection.close()
         log(f"User [yellow]{login}[/yellow] added to users table")
         return 'Added'
@@ -106,6 +102,14 @@ def userValidation(nameDB: str, login: str, authentication_name: str) -> str:
         log(f"Authentication name [yellow]{authentication_name}[/yellow] is [red]already taken[/red]")
         return 'Authentication name is already taken'
 
+    if authentication_name not in getAuthenticationNames(nameDB):
+        connection = initConnection(nameDB)
+        sql = f"INSERT INTO verification(`authentication_name`) VALUES('{authentication_name}')"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        connection.commit()
+        connection.close()
+
     log(f"User [yellow]{login}[/yellow] is [green]valid[/green]")
     return 'Validate'
 
@@ -134,8 +138,19 @@ def getUserInfoByLogin(nameDB: str, login:str, column: str) -> str:
     return result
 
 
+def getAuthenticationNames(nameDB: str) -> list[str]:
+    """Returns authentication names from verification table"""
+    connection = initConnection(nameDB)
+    sql = f"SELECT authentication_name FROM verification"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    connection.close()        
+    return [row[0] for row in rows]
+
+
 def getVerificationCode(nameDB: str, authentication_name:str) -> str:
-    """Returns verification_code by authentication_name"""
+    """Returns verification_code by authentication_name from verification table"""
     connection = initConnection(nameDB)
     sql = f"SELECT verification_code FROM verification WHERE authentication_name = '{authentication_name}'"
     cursor = connection.cursor()
@@ -144,17 +159,18 @@ def getVerificationCode(nameDB: str, authentication_name:str) -> str:
     connection.close()
     return result
 
-    
 
 
 
-nameDB = "test.db"
+
+# nameDB = "TRChat.db"
 # prepareDataBase(nameDB)
 # addUser(nameDB, "kuka", "kokamd", "password", "312412113")
 # addUser(nameDB, "kuka1221", "kokamd", "password", "312412231213")
 # addUser(nameDB, "kuka11", "kokamd", "password", "3124123")
 # addUser(nameDB, "kuka2", "kokamd", "password", "312412321")
 
+# log(getAuthenticationNames(nameDB))
 
-log(getVerificationCode(nameDB, getUserInfoByLogin(nameDB, "kuka", "authentication_name")))
-log(getVerificationCode(nameDB, getUserInfoByLogin(nameDB, "kuka11", "authentication_name")))
+# log(getVerificationCode(nameDB, getUserInfoByLogin(nameDB, "kuka", "authentication_name")))
+# log(getVerificationCode(nameDB, getUserInfoByLogin(nameDB, "kuka11", "authentication_name")))

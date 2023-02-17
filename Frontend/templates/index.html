@@ -226,14 +226,14 @@
         <button onclick="show_signup_panel(false)"></button>
         <div>
             <h2>Sign up</h2>
-            <h4 class="field_name">Login</h4>
-            <input class="field" type="text">
-            <h4 class="field_name">NickName</h4>
-            <input class="field" type="text">
-            <h4 class="field_name">Password</h4>
-            <input class="field" type="password">
-            <h4 class="field_name">Confirm password</h4>
-            <input class="field" type="password">
+            <h4 class="field_name">Login <err class="errors" id="reg_login_err"></err></h4>
+            <input class="field" id="reg_login" type="text">
+            <h4 class="field_name">NickName <err class="errors" id="reg_nickname_err"></err></h4>
+            <input class="field" id="reg_nickname" type="text">
+            <h4 class="field_name">Password <err class="errors" id="reg_password1_err"></err></h4>
+            <input class="field" id="reg_password1" type="password">
+            <h4 class="field_name">Confirm password  <err class="errors" id="reg_password2_err"></err></h4>
+            <input class="field" id="reg_password2" type="password">
             <br><br>
             <button onclick="show_telegram_verif()">Sign up with Telegram</button>
             <button onclick="show_email_verif()">Sign up with Email</button>
@@ -245,27 +245,32 @@
                     <a style="color: white;" href="https://t.me/TR_chat_Authentication_bot" target="_blank">my bot</a>
                     for getting it (format 123456789))
                 </note>
+                <err class="errors" id="reg_auth_code_tg_err"></err>
                 </h4>
-                <input class="field" type="text">
-                <button class="get_code">Get verification code</button>
+                <input class="field" id="reg_auth_code_tg" type="text">
+                <button class="get_code" onclick="getVerifCode()">Get verification code</button>
+                <status id="get_code_status_tg"></status>
                 <h4 class="field_name">Verification code
                     <note>(format AB1C2)</note>
+                    <err class="errors" id="reg_verif_tg_err"></err>
                 </h4>
-                <input class="field" type="text">
+                <input class="field" id="reg_verif_code_tg" type="text">
                 <br><br><br>
-                <button class="final_button">Create an account</button>
+                <button class="final_button" onclick="createAccount()">Create an account</button>
             </div>  
             
             <div class="email_sign_up">
-                <h4 class="field_name">Email</h4>
-                <input class="field" type="text"> 
-                <button class="get_code">Get verification code</button>
+                <h4 class="field_name">Email <err class="errors" id="reg_auth_code_email_err"></err></h4>
+                <input class="field" id="reg_auth_code_email" type="text"> 
+                <button class="get_code" onclick="getVerifCode()">Get verification code</button>
+                <status id="get_code_status_email"></status>
                 <h4 class="field_name">Verification code
                     <note>(format AB1C2)</note>
+                    <err class="errors" id="reg_verif_email_err"></err>
                 </h4>
-                <input class="field" type="text">
+                <input class="field" id="reg_verif_code_email" type="text">
                 <br><br><br>
-                <button class="final_button">Create an account</button>
+                <button class="final_button" onclick="createAccount()">Create an account</button>
             </div>
             <br><br>
         </div>

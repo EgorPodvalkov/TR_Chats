@@ -20,7 +20,7 @@ def send_verification_code_email(user_email: str, code: str):
 
     messageText = f"""
     Hi!\n
-    Your verification code is {code} .\n 
+    Your verification code is {code}.\n 
     Enter this code on the website to confirm the activity on your account.\n
     Good luck!😸
     """
@@ -39,4 +39,4 @@ def send_verification_code_email(user_email: str, code: str):
 
     log(f"[b]Verification code[/b] sent to email {user_email}")
 
-send_verification_code_email(environ.get("BOT_EMAIL"), "12345")
+# send_verification_code_email(environ.get("BOT_EMAIL"), "12345")
