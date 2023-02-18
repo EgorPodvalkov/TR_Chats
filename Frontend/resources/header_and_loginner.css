@@ -35,7 +35,7 @@ header > div.buttons{
     margin-top: 16px;
     height: 60px;
     border-radius: 30px;
-    display: inline;
+    display: none;
 }
 header > div.buttons > input.log, header > div.buttons > input.sign{
     background-color: rgb(28, 29, 29);
@@ -75,7 +75,7 @@ header > div.acc_panel > input.with_bottom_border{
 }
 .registrator{
     --panel-width: 500px;
-    display: inline;
+    display: none;
 }
 .loginer > button, .registrator > button{
     position: absolute;
@@ -160,7 +160,7 @@ header > div.acc_panel > input.with_bottom_border{
 .telegram_sign_up, .email_sign_up{
     display: none;
 }
-.telegram_sign_up > status, .email_sign_up > status{
+.telegram_sign_up > status, .email_sign_up > status, .loginer > div > status{
     color: rgb(0, 230, 0);
     margin-left: 10px;
     font-size: medium;

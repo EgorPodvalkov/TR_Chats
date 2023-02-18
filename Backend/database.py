@@ -1,12 +1,13 @@
 '''
 Module that manages databases\n
-Main functions are prepareDataBase, addUser, getUsersColumn, getUserInfoByLogin, userValidation
+Main functions are prepareDataBase, addUser, getUsersColumn, getUserInfoByLogin, userValidation, 
+getLoginBySession, updateVerificationCode, deleteVerificationCode
 '''
 # other libs
 import sqlite3
 from datetime import datetime
 # my libs
-from myCommonFeatures import log
+from myCommonFeatures import log, generateCode
 
 
 def prepareDataBase(nameDB: str):
@@ -31,13 +32,13 @@ def initConnection(nameDB: str):
 
 def initTables(connection: str):
     '''Tries to create new tables for users, verefication'''
-    sql = "CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, login TEXT NOT NULL, nickname TEXT NOT NULL, password TEXT NOT NULL, authentication_method TEXT NOT NULL, authentication_name TEXT NOT NULL)"
+    sql = "CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, login TEXT NOT NULL, nickname TEXT NOT NULL, password TEXT NOT NULL, authentication_method TEXT NOT NULL, authentication_name TEXT NOT NULL, session_code TEXT NOT NULL)"
     connection.execute(sql)
     sql = "CREATE TABLE IF NOT EXISTS verification( id INTEGER PRIMARY KEY, authentication_name TEXT NOT NULL, verification_code TEXT)"
     connection.execute(sql)
 
 
-# change block
+# change data block
 
 def addUser(nameDB: str, login: str, nickname: str, password: str, authentication_name: str):
     """
@@ -53,8 +54,10 @@ def addUser(nameDB: str, login: str, nickname: str, password: str, authenticatio
         else:
             authentication_method = "Telegram"
 
+        session_code = generateCode(30)
+
         connection = initConnection(nameDB)
-        sql = f"INSERT INTO users(`login`, `nickname`, `password`, `authentication_method`, `authentication_name`) VALUES('{login}', '{nickname}', '{password}', '{authentication_method}', '{authentication_name}')"
+        sql = f"INSERT INTO users(`login`, `nickname`, `password`, `authentication_method`, `authentication_name`, `session_code`) VALUES('{login}', '{nickname}', '{password}', '{authentication_method}', '{authentication_name}', '{session_code}')"
         cursor = connection.cursor()
         cursor.execute(sql)
         connection.commit()
@@ -85,7 +88,7 @@ def deleteVerificationCode(nameDB: str, authentication_name: str):
     connection.close()
 
 
-# select block
+# getting data block
 
 def userValidation(nameDB: str, login: str, authentication_name: str) -> str:
     """
@@ -98,7 +101,7 @@ def userValidation(nameDB: str, login: str, authentication_name: str) -> str:
         log(f"Login [yellow]{login}[/yellow] is [red]already taken[/red]")
         return 'Login is already taken'
 
-    if authentication_name in getUsersColumn(nameDB, "authentication_name"):
+    if authentication_name in getUsersColumn(nameDB, "authentication_name") and authentication_name != "419047817":
         log(f"Authentication name [yellow]{authentication_name}[/yellow] is [red]already taken[/red]")
         return 'Authentication name is already taken'
 
@@ -113,10 +116,11 @@ def userValidation(nameDB: str, login: str, authentication_name: str) -> str:
     log(f"User [yellow]{login}[/yellow] is [green]valid[/green]")
     return 'Validate'
 
+    # users
 
 def getUsersColumn(nameDB: str, column: str) -> list[str]:
     """Returns list of specified column\n
-    Columns: 'login', 'nickname', 'password', 'authentication_method', 'authentication_name'"""
+    Columns: 'login', 'nickname', 'password', 'authentication_method', 'authentication_name', 'session_code'"""
     connection = initConnection(nameDB)
     sql = f"SELECT {column} FROM users"
     cursor = connection.cursor()
@@ -128,7 +132,7 @@ def getUsersColumn(nameDB: str, column: str) -> list[str]:
 
 def getUserInfoByLogin(nameDB: str, login:str, column: str) -> str:
     """Returns specified info by user login\n
-    Columns: 'login', 'nickname', 'password', 'authentication_method', 'authentication_name'"""
+    Columns: 'login', 'nickname', 'password', 'authentication_method', 'authentication_name', 'session_code'"""
     connection = initConnection(nameDB)
     sql = f"SELECT {column} FROM users WHERE login = '{login}'"
     cursor = connection.cursor()
@@ -137,6 +141,21 @@ def getUserInfoByLogin(nameDB: str, login:str, column: str) -> str:
     connection.close()
     return result
 
+
+def getLoginBySession(nameDB: str, session_code:str):
+    """Returns login by session"""
+    connection = initConnection(nameDB)
+    sql = f"SELECT login FROM users WHERE session_code = '{session_code}'"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    try:
+        result = cursor.fetchall()[0][0]
+        connection.close()
+        return result
+    except:
+        return None
+
+    # verification
 
 def getAuthenticationNames(nameDB: str) -> list[str]:
     """Returns authentication names from verification table"""

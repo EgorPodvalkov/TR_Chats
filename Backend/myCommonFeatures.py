@@ -1,5 +1,5 @@
 '''
-This module contains log, generateVerifCode \n
+This module contains log, generateCode \n
 Also this module loads venv values from .env file
 '''
 from rich.console import Console
@@ -16,11 +16,11 @@ if os.path.exists(dotenv_path):
     log("vEnv values from .env file loaded")
 
 
-def generateVerifCode() -> str:
-    '''Returnes random code format AB1C2'''
+def generateCode(length: int) -> str:
+    '''Returnes random code specified length'''
     chars = ascii_uppercase + "1234567890"
     result = ""
-    for index in range(5):
+    for index in range(length):
         result += chars[randint(0, len(chars) - 1)]
     return result
 
