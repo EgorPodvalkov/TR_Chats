@@ -160,7 +160,7 @@ header > div.acc_panel > input.with_bottom_border{
 .telegram_sign_up, .email_sign_up{
     display: none;
 }
-.telegram_sign_up > status, .email_sign_up > status, .loginer > div > status{
+.telegram_sign_up > status, .email_sign_up > status, .loginer > div > status, .field_name > .status{
     color: rgb(0, 230, 0);
     margin-left: 10px;
     font-size: medium;

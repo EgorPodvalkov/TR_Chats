@@ -57,8 +57,8 @@ button.add_workplace{
     border-radius: 3px;
 }
 
-/* adder_workplace */
-.adder_workplace{
+/* adder_workplace and adder_channel*/
+.adder_workplace, .adder_channel{
     --panel-width: 400px;
     display: none;
 }
@@ -71,7 +71,7 @@ button.add_workplace{
     border: 0;
     background-color: rgba(37, 37, 37, 0.5);
 }
-.adder_workplace > div{
+.adder_workplace > div, .adder_channel > div{
     position: absolute;
     color: rgb(241, 255, 40);
     top: 150px;
@@ -80,13 +80,12 @@ button.add_workplace{
     background-color: rgb(46, 46, 46);
     border-radius: 15px;
 }
-.adder_workplace > div > h2{
+.adder_workplace > div > h2, .adder_channel > div > h2{
 margin-top: 8px;
 height: 35px;
 text-align: center; 
 border-bottom: 1px solid rgba(29, 29, 29, 0.4);
 }
-
 /* chanels */
 div.channels{
     position: absolute;
@@ -148,6 +147,11 @@ div.chat{
     right: 0;
     background-color: rgb(37, 37, 37);
 }
+div.chat > h4{
+    font-weight: normal;
+    margin: 0;
+    padding: 14px;
+}
 div.chat > h3{
     font-weight: normal;
     margin: 0;
@@ -184,6 +188,7 @@ div.chat > .chat_area{
     padding-left: 7px;
 }
 .messages > time{
+    margin-left: 5px;
     font-size: xx-small;
     color: rgba(200, 200, 200, 0.4);
 }
@@ -192,12 +197,17 @@ div.chat > .chat_area{
     padding-left: 15px;
 }
 
-div.chat > .send_area{
+.send_area{
+    position: absolute;
+    bottom: 0;
+    left: 380px;
+    right: 0;
     height: 57px;    
     background-color: rgb(24, 24, 24);
     border-top: 3px solid rgb(19, 18, 18, 0.8);
+    display: none;
 }
-div.chat > .send_area > input{
+.send_area > input{
     margin-top: 20px;
     margin-left: 15px;
     width: calc(100% - 85px);
@@ -207,7 +217,7 @@ div.chat > .send_area > input{
     border: 0;
     border-radius: 8px;
 }
-div.chat > .send_area > button{
+.send_area > button{
     position: absolute;
     right: 10px;
     margin-top: 10px;

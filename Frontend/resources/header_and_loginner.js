@@ -1,8 +1,5 @@
 let acc_panel_visible = false;
 
-let front_url = window.location.protocol + "//" + window.location.hostname + ":8080/";
-let back_url = window.location.protocol + "//"+ window.location.hostname + ":8081/";
-
 function show_buttons(){
     // shows buttons, hides avatar
         document.getElementById("avatar_in_header").style = "display: none;";
@@ -309,7 +306,7 @@ function createAccount(){
 }
 
 function logInAccount(){
-    if(log_validation){
+    if(log_validation()){
         let good = true;
         let login = document.getElementById("log_login").value;
         let password = document.getElementById("log_password").value;
@@ -323,7 +320,7 @@ function logInAccount(){
         }
 
         if(good){
-            xhttp = new XMLHttpRequest();
+            const xhttp = new XMLHttpRequest();
             xhttp.onload = function(){
                 
                 // not something wrong with email or authentication code
@@ -358,43 +355,36 @@ function logInAccount(){
 
 function deleteSession(){
     // deletes session from cookies
-    document.cookie = "session=" + "d" + ";max-age=0";
+    document.cookie = "session=no;max-age=0";
+    document.cookie = "workplace=no;max-age=0";
+    document.cookie = "channel=no;max-age=0";
     show_buttons();
     acc_panel_visible = true;
     show_acc_panel();
 }
 
 
-function getSession(){
-    // returns session from cookies
-    let session_str = "session="
-    let my_cookie = document.cookie
-    if(my_cookie.includes(session_str)){
-        let start_point = my_cookie.indexOf(session_str) + session_str.length
-        my_cookie = my_cookie.substring(start_point)
-        let end_point = my_cookie.indexOf(";")
-        if(end_point == -1){
-            return my_cookie;
-        }
-        else {
-            return my_cookie.substring(0, end_point);
-        }
-    }
-    return null
-}
+
 
 
 function autoLogin(){
     let session = getSession();
+    
     if (session != null){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
             if(this.responseText == "None"){
                 show_buttons();
                 deleteSession();
+                let workplaces = document.getElementsByClassName("workplaces_area")[0]
+                workplaces.innerHTML = "<button>Something wrong with your session code, try to login!</button>"
             }
             else{
                 show_avatar();
+                getWorkplaces();
+                getChannels(getCookieWorkplace());
+                let chat = document.getElementsByClassName("chat")[0]
+                chat.innerHTML = "<h4>Choose Channel to start chatting 🤖</h4>"
 
             }
         }
@@ -404,6 +394,11 @@ function autoLogin(){
     }
     else{
         show_buttons();
+        let workplaces = document.getElementsByClassName("workplaces_area")[0]
+        workplaces.innerHTML = '<button>Here will be your workplaces after you log in</button>'
+        let channels = document.getElementsByClassName("channels")[0]
+        channels.innerHTML = '<h3>Channels</h3><div class="channels_area"><button>Here will be channels after you log in</button></div>'
+        
     }
 }
 

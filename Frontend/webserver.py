@@ -50,4 +50,11 @@ def get_avatar():
         return generateResponse()
     
 
+@app.route("/joinWorkplace")
+def join():
+    '''Renders join page'''
+    workplace_id = request.args.get("workplace_id")
+
+    return render_template("join.html", workplace_id = workplace_id)
+
 app.run(host="0.0.0.0", port=8080, debug=True)

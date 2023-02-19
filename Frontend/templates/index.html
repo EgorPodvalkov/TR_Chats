@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TR Chat</title>
     <!-- Styles -->
-    <link rel="stylesheet" href = "/resource?name=index.css"></style>
-    <link rel="stylesheet" href = "/resource?name=header_and_loginner.css"></style>
+    <link rel="stylesheet" href = "/resource?name=index.css">
+    <link rel="stylesheet" href = "/resource?name=header_and_loginner.css">
 </head>
 <body>
     <!-- workplaces -->
@@ -16,26 +16,16 @@
             Workplaces
             <button onclick="show_workplaces_adder()" class="add_workplace" >+</button>
         </h2>
-        <div class="workplaces_area">
-            <button onclick="">Any Name1</button>
-            <button>Any Name2</button>
-            <button>Any Name3</button>
+        <div class="workplaces_area" onload="getWorkplaces()">
         </div>
     </div>
     <!-- chanels -->
     <div class="channels">
-        <h3>
-            Channels
-            <button onclick="show_workplaces_adder()" class="add_channel" >+</button>
-        </h2>
-        <div class="channels_area">
-            <button>Any Name</button>
-        </div>
+        
     </div>
     <!-- chat -->
     <div class="chat">
-        <h3>Channel Name</h3>
-
+        <!-- <h3>Channel Name</h3>
         <div class="chat_area">
             <messages class="messages">
                 <name>Egor</name>
@@ -54,7 +44,11 @@
         <div class="send_area">
             <input type="text">
             <button><img src="/resource?name=send.png" alt="Send"></button>
-        </div>
+        </div> -->    
+    </div>
+    <div class="send_area">
+        <input id="message_text_area" type="text">
+        <button onclick="sendMessage()"><img src="/resource?name=send.png" alt="Send"></button>
     </div>
    
     <!-- header -->
@@ -136,7 +130,7 @@
             <div class="email_sign_up">
                 <h4 class="field_name">Email <err class="errors" id="reg_auth_code_email_err"></err></h4>
                 <input class="field" id="reg_auth_code_email" type="text"> 
-                <button class="get_code" onclick="getVerifCode()">Get verification code</button>
+                <button class="get_code" onclick="getVerifCode_reg()">Get verification code</button>
                 <status class="status" id="get_code_status_email"></status>
                 <h4 class="field_name">Verification code
                     <note>(format AB1C2)</note>
@@ -155,10 +149,26 @@
         <button onclick="show_workplaces_adder(false)" class="bg_close_button"></button>
         <div>
             <h2>Create new workplace</h2>
-            <h4 class="field_name">Unique workplace name</h4>
-            <input class="field" type="text">
-            <br><br><br>
-            <button class="final_button">Create</button>
+            <h4 class="field_name">Unique workplace name <err class="errors" id="workplace_name_err"></err></h4>
+            <input class="field" id="workplace_name" type="text">
+            <br><br>
+            <button class="final_button" onclick="add_workplace()">Create</button>
+            <br><br>
+        </div>
+    </div>
+    <div class="adder_channel">
+        <button onclick="show_channels_adder(false)" class="bg_close_button"></button>
+        <div>
+            <h2>Create new Channel</h2>
+            <h4 class="field_name">Unique channel name <err class="errors" id="channel_name_err"></err></h4>
+            <input class="field" id="channel_name" type="text">
+            <br><br>
+            <button class="final_button" onclick="add_channel()">Create</button>
+            <h4 class="field_name">
+                You can add user to this workplace by giving him link.
+                <status class="status" id="copy_status"></status>
+            </h4>
+            <button onclick="copyLink()" class="final_button">Copy link</button>
             <br><br>
         </div>
     </div>

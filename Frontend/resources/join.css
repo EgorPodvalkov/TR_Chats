@@ -1,0 +1,26 @@
+body{
+    background:  rgb(30, 31, 31);
+}
+.window{
+    --panel-width: 400px;
+    position: absolute;
+    color: rgb(241, 255, 40);
+    top: 100px;
+    left: calc(50vw - var(--panel-width)/2);
+    width: var(--panel-width);    
+    background-color: rgb(46, 46, 46);
+    border-radius: 15px;
+}
+h4{
+    text-align: center;
+}
+.button{
+    font-size: larger;
+    width: 100px;
+    margin-left: calc((var(--panel-width) - 200px) / 3);
+    font-weight: bold;
+    background-color: rgb(63, 63, 63);
+    color: rgb(241, 255, 40);
+    border: 1px solid rgb(241, 255, 40, 0.7);
+    border-radius: 5px;
+}

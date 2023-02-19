@@ -3,7 +3,17 @@
 from flask import Flask, request, make_response
 from datetime import timedelta
 # my libs
-from database import prepareDataBase, userValidation, updateVerificationCode, deleteVerificationCode, getVerificationCode, addUser, getUserInfoByLogin, getLoginBySession, getUsersColumn
+from database import (
+    prepareDataBase, userValidation, updateChat,                # specific functions
+    updateVerificationCode, deleteVerificationCode, getVerificationCode,    # verif code funcs
+    addUser, addWorkplace, addChannel, addUserToWorkplace,      # adding funcs
+    
+    getUserInfoByLogin, getUsersColumn, getLoginBySession,  # getting from user table funcs
+    getUserWorkplacesColumn, getWorkplacesHTML,             # getting from userN_workplces table funcs
+    getNameByWorkplaceID,                                   # getting from workplaces table funcs
+    getChannelsHTML, getMessagesHtml,                       # getting from workplaceN_channels table funcs
+                                                 
+)
 from myCommonFeatures import log, generateCode
 from emailSender import send_verification_code_email
 from telegramBot import send_verification_code_telegram
@@ -133,5 +143,133 @@ def checkSession():
 
 
     return generateResponse()
+
+
+@app.route("/addWorkplace")
+def newWorkplace():
+    workplace_name = request.args.get("name")
+    session_code = request.args.get("session")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+
+    login = getLoginBySession(nameDB, session_code)
+    return generateResponse(addWorkplace(nameDB, workplace_name, login))
+
+
+@app.route("/addChannel")
+def newChannel():
+    channel_name = request.args.get("name")
+    workplace_id = request.args.get("workplace_id")
+    session_code = request.args.get("session")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+
+    # user workspaces checking
+    user_id = getUserInfoByLogin(nameDB, getLoginBySession(nameDB, session_code), 'id')
+    if workplace_id not in getUserWorkplacesColumn(nameDB, user_id, 'global_id'):
+        return generateResponse("No access")
+
+    return generateResponse(addChannel(nameDB, channel_name, workplace_id))
+
+
+@app.route("/getWorkplaces")
+def sendWorkplaces():
+    session_code = request.args.get("session")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+    
+    user_id = getUserInfoByLogin(nameDB, getLoginBySession(nameDB, session_code), 'id')
+    return generateResponse(getWorkplacesHTML(nameDB, user_id))
+
+
+@app.route("/getChannels")
+def sendWChannels():
+    session_code = request.args.get("session")
+    workplace_id = request.args.get("workplace_id")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+    
+    # user workspaces checking
+    user_id = getUserInfoByLogin(nameDB, getLoginBySession(nameDB, session_code), 'id')
+    if workplace_id not in getUserWorkplacesColumn(nameDB, user_id, 'global_id'):
+        return generateResponse("No access")
+
+    return generateResponse(getChannelsHTML(nameDB, workplace_id))
+
+
+@app.route("/getWorkplaceName")
+def sendWorkplaceName():
+    workplace_id = request.args.get("workplace_id")
+    try:
+        return generateResponse(getNameByWorkplaceID(nameDB, workplace_id))
+    except:
+        return generateResponse("Bad id")
+
+
+@app.route("/getChat")
+def sendChat():
+    channel_id = request.args.get("channel_id")
+    workplace_id = request.args.get("workplace_id")
+    session_code = request.args.get("session")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+    
+    # user workspaces checking
+    user_id = getUserInfoByLogin(nameDB, getLoginBySession(nameDB, session_code), 'id')
+    if workplace_id not in getUserWorkplacesColumn(nameDB, user_id, 'global_id'):
+        return generateResponse("No access")
+    
+    return generateResponse(getMessagesHtml(nameDB, workplace_id, channel_id))
+
+
+@app.route("/sendMessage")
+def sendMessage():
+    text = request.args.get("text")
+    workplace_id = request.args.get("workplace_id")
+    channel_id = request.args.get("channel_id")
+    session_code = request.args.get("session")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+    
+    # user workspaces checking
+    login = getLoginBySession(nameDB, session_code)
+    user_id = getUserInfoByLogin(nameDB, login, 'id')
+    if workplace_id not in getUserWorkplacesColumn(nameDB, user_id, 'global_id'):
+        return generateResponse("No access")
+
+    nickname = getUserInfoByLogin(nameDB, login, 'nickname')
+    updateChat(nameDB, workplace_id, channel_id, nickname, text)
+    return generateResponse("Success")
+
+
+
+@app.route("/joinWorkplace")
+def joinWorkplace():
+    workplace_id = request.args.get("workplace_id")
+    session_code = request.args.get("session")
+
+    # session checking
+    if session_code not in getUsersColumn(nameDB, 'session_code'):
+        return generateResponse("Bad session code")
+
+    # user workspaces chacking
+    user_id = getUserInfoByLogin(nameDB, getLoginBySession(nameDB, session_code), 'id')
+    if workplace_id in getUserWorkplacesColumn(nameDB, user_id, 'global_id'):
+        return generateResponse("You are already in workplace!")
+    
+    return generateResponse(addUserToWorkplace(nameDB, getNameByWorkplaceID(nameDB, workplace_id), user_id))
+
 
 run_webserver()
