@@ -2,7 +2,7 @@
 # other libs
 from flask import Flask, request, make_response
 # my libs
-from database import (
+from database.database import (
     prepareDataBase, userValidation, updateChat,                # specific functions
     updateVerificationCode, deleteVerificationCode, getVerificationCode,    # verif code funcs
     addUser, addWorkplace, addChannel, addUserToWorkplace,      # adding funcs
@@ -14,8 +14,8 @@ from database import (
                                                  
 )
 from myCommonFeatures import log, generateCode
-from emailSender import send_verification_code_email
-from telegramBot import send_verification_code_telegram
+from sender.emailSender import send_verification_code_email
+from sender.telegramBot import send_verification_code_telegram
 
 
 nameDB = "TRChat.db"
