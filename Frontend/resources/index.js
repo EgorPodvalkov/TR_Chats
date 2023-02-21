@@ -260,8 +260,8 @@ function copyLink(){
         status.innerHTML = "Copied!"
     }
     catch{
-        status.style = "font-size: small;font-weight: 10;"
-        status.innerHTML = "<br>" + link;
+        status.style = "font-size: small;font-weight: 10;color: yellow;"
+        status.innerHTML = "Your browser has prohibited copying, here is the link:<br>" + link;
     }
 }
 

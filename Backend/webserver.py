@@ -1,7 +1,6 @@
 """Module that launch webserver for backend based on Flask"""
 # other libs
 from flask import Flask, request, make_response
-from datetime import timedelta
 # my libs
 from database import (
     prepareDataBase, userValidation, updateChat,                # specific functions
@@ -272,4 +271,5 @@ def joinWorkplace():
     return generateResponse(addUserToWorkplace(nameDB, getNameByWorkplaceID(nameDB, workplace_id), user_id))
 
 
-run_webserver()
+if __name__ == '__main__':
+    run_webserver()
