@@ -14,8 +14,8 @@ from database.database import (
                                                  
 )
 from myCommonFeatures import log, generateCode
-from sender.emailSender import send_verification_code_email
-from sender.telegramBot import send_verification_code_telegram
+from emailSender import send_verification_code_email
+from telegramBot import send_verification_code_telegram
 
 
 nameDB = "TRChat.db"

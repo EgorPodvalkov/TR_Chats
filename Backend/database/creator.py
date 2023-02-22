@@ -20,7 +20,7 @@ def initConnection(nameDB: str):
     try:
         connection = sqlite3.connect(nameDB)
     except sqlite3.Error as err:
-        log(f"Error! {err} \n Conection failed!")
+        log(f"[red]Error![/red] {err} \n Conection failed!")
     return connection
 
 
@@ -58,7 +58,7 @@ def initTables(connection: str):
 
         log("Tables [blue]users[/blue], [blue]verification[/blue], [blue]workplaces[/blue] created (if they not exist)!")
     except:
-        log("Something wrong!\nFailed to create tables [blue]users[/blue], [blue]verification[/blue] and [blue]workplaces[/blue]!")
+        log("[red]Something wrong![/red]\nFailed to create tables [blue]users[/blue], [blue]verification[/blue] and [blue]workplaces[/blue]!")
 
 
 def initUserWorkplacesTable(nameDB: str, user_id: str):
@@ -73,11 +73,12 @@ def initUserWorkplacesTable(nameDB: str, user_id: str):
             workplace_name TEXT NOT NULL
         )"""
         connection.execute(sql)
-        connection.close()
 
         log(f"Table [blue]user{user_id}_workplaces[/blue] created!")
     except:
-        log(f"Something wrong!\nFailed to create tables [blue]user{user_id}_workplaces[/blue]!")
+        log(f"[red]Something wrong![/red]\nFailed to create tables [blue]user{user_id}_workplaces[/blue]!")
+    finally:
+        connection.close()
 
 
 def initWorkplaceChannelsTable(nameDB: str, workplace_id: str):
@@ -88,12 +89,13 @@ def initWorkplaceChannelsTable(nameDB: str, workplace_id: str):
         # workplace{workplace_id}_channels table creation (id, name , chat)
         sql = f"""CREATE TABLE IF NOT EXISTS workplace{workplace_id}_channels(
             id INTEGER PRIMARY KEY, 
-            name TEXT NOT NULL, 
+            channel_name TEXT NOT NULL, 
             chat TEXT
         )"""
         connection.execute(sql)
-        connection.close()
 
         log(f"Table [blue]workplace{workplace_id}_channels[/blue] created!")
     except:
-        log(f"Something wrong!\nFailed to create tables [blue]workplace{workplace_id}_channels[/blue]!")
+        log(f"[red]Something wrong![/red]\nFailed to create tables [blue]workplace{workplace_id}_channels[/blue]!")
+    finally:
+        connection.close()

@@ -4,7 +4,7 @@ from threading import Thread
 import os
 # my libs
 from webserver import run_webserver
-from verification.telegramBot import run_telegram_bot
+from telegramBot import run_telegram_bot
 
 
 def manager():

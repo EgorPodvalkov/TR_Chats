@@ -1,6 +1,11 @@
 '''Module that gets info from database\n
-Main functions are getUsersColumn, getUserInfoByLogin, userValidation, 
-getLoginBySession,'''
+Main functions:
+- (users) getUsersColumn, getUserFieldByLogin, getUserFieldBySession;
+- (verification) getAuthenticationNames, getVerificationCode;
+- (workplaces) getWorkplaceColumn, getWorkplaceFieldByName, getWorkplaceFieldById;
+- (userN_workplaces) getUserWorkplacesColumn;
+- (workspaceN_channles) getWorkplaceChannelsColumn, getWorkplaceChannelsFieldByChannelId;
+'''
 # other libs
 from typing import Literal
 # my libs
@@ -22,11 +27,12 @@ def getUsersColumn(
         cursor = connection.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
-        connection.close()        
         return [str(row[0]) for row in rows]
     except:
-        log(f"Something wrong!\nFailed to select {column}s from [blue]users[/blue] table!")
+        log(f"[red]Something wrong![/red]\nFailed to select {column}s from [blue]users[/blue] table!")
         return [""]
+    finally:
+        connection.close()
 
 
 def getUserFieldByLogin(
@@ -43,11 +49,12 @@ def getUserFieldByLogin(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        connection.close()
         return str(result)
     except:
-        log(f"Something wrong!\nFailed to select {column} of user [yellow]{login}[/yellow] from [blue]users[/blue] table!")
+        log(f"[red]Something wrong![/red]\nFailed to select {column} of user [yellow]{login}[/yellow] from [blue]users[/blue] table!")
         return ""
+    finally:
+        connection.close()
 
 
 def getUserFieldBySession(
@@ -64,11 +71,12 @@ def getUserFieldBySession(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        connection.close()
         return str(result)
     except:
-        log(f"Something wrong!\nFailed to select {column} of session {session_code} from [blue]users[/blue] table!")
+        log(f"[red]Something wrong![/red]\nFailed to select {column} of session {session_code} from [blue]users[/blue] table!")
         return ""
+    finally:
+        connection.close()
 
 
 # verification
@@ -84,11 +92,12 @@ def getAuthenticationNames(
         cursor = connection.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
-        connection.close()        
         return [row[0] for row in rows]
     except:
-        log("Something wrong!\nFailed to select authentication_names from [blue]verification[/blue] table!")
+        log("[red]Something wrong![/red]\nFailed to select authentication_names from [blue]verification[/blue] table!")
         return [""]
+    finally:
+        connection.close()
 
 
 def getVerificationCode(
@@ -104,13 +113,14 @@ def getVerificationCode(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        connection.close()
         return result
     except:
-        log(f"""Something wrong!\n
+        log(f"""[red]Something wrong![/red]\n
         Failed to select verification_code by authentication_name [yellow]{authentication_name}[/yellow] 
         from [blue]verification[/blue] table!""")
         return ""
+    finally:
+        connection.close()
 
 
 # workplaces
@@ -127,11 +137,12 @@ def getWorkplaceColumn(
         cursor = connection.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
-        connection.close()        
         return [row[0] for row in rows]
     except:
-        log(f"Something wrong!\nFailed to select {column}s from [blue]workplaces[/blue] table!")
+        log(f"[red]Something wrong![/red]\nFailed to select {column}s from [blue]workplaces[/blue] table!")
         return [""]
+    finally:
+        connection.close()
 
 
 def getWorkplaceFieldByName(
@@ -148,13 +159,14 @@ def getWorkplaceFieldByName(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        connection.close()
         return str(result)
     except:
-        log(f"""Something wrong!\n
+        log(f"""[red]Something wrong![/red]\n
         Failed to select {column} by workplace_name [yellow]{workplace_name}[/yellow] 
         from [blue]workplaces[/blue] table!""")
         return ""
+    finally:
+        connection.close()
 
 
 def getWorkplaceFieldById(
@@ -171,13 +183,14 @@ def getWorkplaceFieldById(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        connection.close()
         return str(result)
     except:
-        log(f"""Something wrong!\n
+        log(f"""[red]Something wrong![/red]\n
         Failed to select {column} by id [yellow]{id}[/yellow] 
         from [blue]workplaces[/blue] table!""")
         return ""
+    finally:
+        connection.close()
 
 
 # userN_workplaces
@@ -195,11 +208,12 @@ def getUserWorkplacesColumn(
         cursor = connection.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
-        connection.close()        
         return [row[0] for row in rows]
     except:
-        log(f"Something wrong!\nFailed to select {column}s from [blue]user{user_id}_workplaces[/blue] table!")
+        log(f"[red]Something wrong![/red]\nFailed to select {column}s from [blue]user{user_id}_workplaces[/blue] table!")
         return [""]
+    finally:
+        connection.close()
 
 
 # workspaceN_channles
@@ -217,11 +231,12 @@ def getWorkplaceChannelsColumn(
         cursor = connection.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
-        connection.close()        
         return [row[0] for row in rows]
     except:
-        log(f"Something wrong!\nFailed to select {column}s from [blue]workplace{workplace_id}_channels[/blue] table!")
+        log(f"[red]Something wrong![/red]\nFailed to select {column}s from [blue]workplace{workplace_id}_channels[/blue] table!")
         return[""]
+    finally:
+        connection.close()
 
 
 def getWorkplaceChannelsFieldByChannelId(
@@ -239,10 +254,11 @@ def getWorkplaceChannelsFieldByChannelId(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        connection.close()
         return str(result)
     except:
-        log(f"""Something wrong!\n
+        log(f"""[red]Something wrong![/red]\n
         Failed to select {column} by channel_id [yellow]{channel_id}[/yellow] 
         from [blue]workplace{workplace_id}_channels[/blue] table!""")
         return ""
+    finally:
+        connection.close()
