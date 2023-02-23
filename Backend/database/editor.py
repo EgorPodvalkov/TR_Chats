@@ -1,6 +1,10 @@
 '''Module that manages data editions in database\n
 Main functions:\n
-- '''
+- (user) addUser
+- (verification) userValidation, updateVerificationCode, deleteVerificationCode
+- (workplaces) addWorkplace
+- (userN_workplaces) addWorkplaceToUserWorkplaces
+- (workplaceN_channels) addChannel, updateChat'''
 #  other libs
 from datetime import datetime
 from html import escape as saveHTML

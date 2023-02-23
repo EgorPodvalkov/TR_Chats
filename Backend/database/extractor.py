@@ -1,10 +1,10 @@
 '''Module that gets info from database\n
 Main functions:
-- (users) getUsersColumn, getUserFieldByLogin, getUserFieldBySession;
-- (verification) getAuthenticationNames, getVerificationCode;
-- (workplaces) getWorkplaceColumn, getWorkplaceFieldByName, getWorkplaceFieldById;
-- (userN_workplaces) getUserWorkplacesColumn;
-- (workspaceN_channles) getWorkplaceChannelsColumn, getWorkplaceChannelsFieldByChannelId;
+- (users) getUsersColumn, getUserFieldByLogin, getUserFieldBySession
+- (verification) getAuthenticationNames, getVerificationCode
+- (workplaces) getWorkplaceColumn, getWorkplaceFieldByName, getWorkplaceFieldById
+- (userN_workplaces) getUserWorkplacesColumn
+- (workspaceN_channles) getWorkplaceChannelsColumn, getWorkplaceChannelsFieldByChannelId
 '''
 # other libs
 from typing import Literal
