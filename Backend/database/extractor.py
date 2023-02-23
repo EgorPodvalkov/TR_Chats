@@ -254,7 +254,7 @@ def getWorkplaceChannelsFieldByChannelId(
         cursor = connection.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()[0][0]
-        return str(result)
+        return str(result) if result else ""
     except:
         log(f"""[red]Something wrong![/red]\n
         Failed to select {column} by channel_id [yellow]{channel_id}[/yellow] 

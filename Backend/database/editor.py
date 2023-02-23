@@ -190,11 +190,10 @@ def addChannel(nameDB: str, channel_name: str, workplace_id: str) -> str:
     # channel name checking
     if channel_name in getWorkplaceChannelsColumn(nameDB, workplace_id, 'channel_name'):
         return "Channel name is already taken"
-
     connection = initConnection(nameDB)
     try:
         # inserting channel to workplaceN_channel table
-        sql = f"INSERT INTO workplace{workplace_id}_channels(`name`) VALUES('{channel_name}')"
+        sql = f"INSERT INTO workplace{workplace_id}_channels (`channel_name`) VALUES('{channel_name}')"
         cursor = connection.cursor()
         cursor.execute(sql)
         connection.commit()
