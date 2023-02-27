@@ -1,31 +1,9 @@
-let acc_panel_visible = false;
+const front_url = window.location.protocol + "//" + window.location.hostname + ":8080/";
+const back_url = window.location.protocol + "//"+ window.location.hostname + ":8081/";
 
-function show_buttons(){
-    // shows buttons, hides avatar
-        document.getElementById("avatar_in_header").style = "display: none;";
-        document.getElementById("log_in_buttons").style = "display: inline;";
-}
-
-function show_avatar(){
-    // hides buttons, shows avatar
-        document.getElementById("log_in_buttons").style = "display: none;";
-        document.getElementById("avatar_in_header").style = "display: inline;";
-}
-
-function show_acc_panel(){
-    // shows or hides account panel(profile, settings, log out)
-    if(acc_panel_visible){
-        document.getElementsByClassName("acc_panel")[0].style = "display: none;";
-        acc_panel_visible = false
-    }
-    else{
-        document.getElementsByClassName("acc_panel")[0].style = "display: inline;";
-        acc_panel_visible = true
-    }
-}
-
+// shows or hides 'Log in' or 'Sign up' panels
 function show_login_panel(bool = true){
-    //shows or hides login panel
+    //shows or hides 'Log in' panel
     if(bool){
         document.getElementsByClassName("loginer")[0].style = "display: inline;";
     }
@@ -33,9 +11,8 @@ function show_login_panel(bool = true){
         document.getElementsByClassName("loginer")[0].style = "display: none;";
     }
 }
-
 function show_signup_panel(bool = true){
-    //shows or hides sign up panel
+    //shows or hides 'Sign up' panel
     if(bool){
         document.getElementsByClassName("registrator")[0].style = "display: inline;";
     }
@@ -46,6 +23,7 @@ function show_signup_panel(bool = true){
     }
 }
 
+// shows verification fields in 'Sign up' panel
 function show_telegram_verif(){
     //shows telegram verif fields and hides email verif fields
     document.getElementsByClassName("telegram_sign_up")[0].style = "display: inline;";
@@ -61,6 +39,7 @@ function show_email_verif(){
     document.getElementById("reg_verif_code_tg").value = "";
 }
 
+// validation functions
 function clearErrorsAndStatuses(){
     // clears errors and statuses
     let errors = document.getElementsByClassName("errors");
@@ -72,7 +51,6 @@ function clearErrorsAndStatuses(){
         statuses[index].innerHTML = "";
     }
 }
-
 function reg_validation(){
     // returns true if user data is valid
     let good = true;
@@ -139,7 +117,6 @@ function reg_validation(){
 
     return good
 }
-
 function log_validation(){// returns true if user data is valid
     let good = true;
     let login = document.getElementById("log_login").value;
@@ -165,6 +142,7 @@ function log_validation(){// returns true if user data is valid
     return good
 }
 
+// verif code functions
 function getVerifCode_reg(){
     // sends verification code to user
     if(reg_validation()){
@@ -223,7 +201,6 @@ function getVerifCode_reg(){
         xhttp_for_unique_login_and_auth.send();
     }
 }
-
 function getVerifCode_log(){
     // sends verification code to user
     if(log_validation()){
@@ -259,9 +236,8 @@ function getVerifCode_log(){
     }
 }
 
-
+// creates account
 function createAccount(){
-    // creates account
     if(reg_validation()){
         let verif_tg = document.getElementById("reg_verif_code_tg").value;
         let verif_email = document.getElementById("reg_verif_code_email").value;
@@ -289,7 +265,7 @@ function createAccount(){
                 show_signup_panel(false);
 
                 let session = this.responseText.substring("account created,".length);
-                document.cookie = "session=" + session + ";max-age=" + (60 * 60 * 24 * 100);
+                setSession(session)
                 autoLogin()
             }
         };
@@ -305,6 +281,7 @@ function createAccount(){
     }
 }
 
+// logs in account
 function logInAccount(){
     if(log_validation()){
         let good = true;
@@ -340,7 +317,7 @@ function logInAccount(){
                     show_login_panel(false);
 
                     let session = this.responseText.substring("login successfully,".length);
-                    document.cookie = "session=" + session + ";max-age=" + (60 * 60 * 24 * 100);
+                    setSession(session)
                     autoLogin()
                 }
 
@@ -352,21 +329,19 @@ function logInAccount(){
     }
 }
 
-
-function deleteSession(){
+// logs out account
+function logOut(){
     // deletes session from cookies
-    document.cookie = "session=no;max-age=0";
-    document.cookie = "workplace=no;max-age=0";
-    document.cookie = "channel=no;max-age=0";
+    setSession();
+    setWorkplaceCookie();
+    setChannelCookie();
     show_buttons();
     acc_panel_visible = true;
     show_acc_panel();
+    autoLogin()
 }
 
-
-
-
-
+// logs in account if session in cooki
 function autoLogin(){
     let session = getSession();
     
@@ -375,14 +350,14 @@ function autoLogin(){
         xhttp.onload = function() {
             if(this.responseText == "None"){
                 show_buttons();
-                deleteSession();
+                logOut();
                 let workplaces = document.getElementsByClassName("workplaces_area")[0]
                 workplaces.innerHTML = "<button>Something wrong with your session code, try to login!</button>"
             }
             else{
                 show_avatar();
                 getWorkplaces();
-                getChannels(getCookieWorkplace());
+                getChannels(getWorkplaceCookie());
                 let chat = document.getElementsByClassName("chat")[0]
                 chat.innerHTML = "<h4>Choose Channel to start chatting 🤖</h4>"
 
