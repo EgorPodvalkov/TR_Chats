@@ -376,5 +376,3 @@ function autoLogin(){
         
     }
 }
-
-autoLogin()
