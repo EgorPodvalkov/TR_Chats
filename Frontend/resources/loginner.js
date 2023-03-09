@@ -358,8 +358,8 @@ function autoLogin(){
                 show_avatar();
                 getWorkplaces();
                 getChannels(getWorkplaceCookie());
-                let chat = document.getElementsByClassName("chat")[0]
-                chat.innerHTML = "<h4>Choose Channel to start chatting 🤖</h4>"
+                let status = document.getElementsByClassName("chat_status")[0]
+                status.innerHTML = "Choose Channel to start chatting"
 
             }
         }

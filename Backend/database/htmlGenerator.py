@@ -58,14 +58,6 @@ def getMessagesHtml(nameDB: str, workplace_id: str, channel_id: str) -> str:
     '''Returns Html code with chat'''
 
     channel_name = getWorkplaceChannelsFieldByChannelId(nameDB, workplace_id, channel_id, 'channel_name')
-    result = f'''
-        <h3>{channel_name}</h3>
-        <div class="chat_area">
-            <messages class="messages">
-    '''
+    result = f'{channel_name}<>'
     result += getWorkplaceChannelsFieldByChannelId(nameDB, workplace_id, channel_id, 'chat')
-    result += '''
-            </messages>
-        </div>
-        '''
     return result

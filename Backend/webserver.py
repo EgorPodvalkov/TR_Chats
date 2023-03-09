@@ -143,7 +143,7 @@ def checkSession():
     '''Checks session'''
     session_code = request.args.get("session")
     login = getUserFieldBySession(nameDB, session_code, 'login')
-    if login == None:
+    if login in [None, ""]:
         return generateResponse("None")
 
 

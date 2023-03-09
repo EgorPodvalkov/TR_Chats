@@ -70,6 +70,6 @@ function getInChatCookie(){
 }
 function setInChatCookie(inChat = false){
     // changes cookie if inChat or deletes it if not inChat
-    if (inChat) document.cookie = `channel=${inChat}`;
+    if (inChat) document.cookie = `inChat=${inChat}`;
     else document.cookie = "inChat=no;max-age=0";
 }

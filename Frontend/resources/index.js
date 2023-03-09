@@ -19,9 +19,17 @@ function getWorkplaces(){
 }
 function getChannels(workplaces_id){
     // gets and displays channels
+
     if(getWorkplaceCookie() != workplaces_id){
         setWorkplaceCookie(workplaces_id);
         setChannelCookie();
+        let chatName = document.getElementsByClassName("chat_name")[0];
+        let status = document.getElementsByClassName("chat_status")[0];
+        let mes = document.getElementsByClassName("messages")[0];
+        chatName.innerHTML = "Channel Name"
+        status.innerHTML = "Choose Channel to start chatting"
+        mes.innerHTML = ""
+        document.getElementsByClassName("send_area")[0].style = "display: none;";
     }
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
@@ -50,39 +58,57 @@ function getChat(channel_id, bottom = false){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         if(this.responseText == "Bad session code"){
-            let chat = document.getElementsByClassName("chat")[0]
-            chat.innerHTML = "<h4>Try to log in!</h4>"
-            autoLogin()
+            let status = document.getElementsByClassName("chat_status")[0];
+            status.innerText = "Try to log in!";
+            autoLogin();
             
         }
         else if(this.responseText == "No access"){
-            let chat = document.getElementsByClassName("chat")[0]
-            chat.innerHTML = "<h4>You haven`t access to this chat🫤</h4>"
+            let status = document.getElementsByClassName("chat_status")[0];
+            status.innerText = "You haven`t access to this chat"
         }
         else{
-            let mes = document.getElementsByClassName("messages")[0]
-            let top
-            if(mes) {
+            let chatName = document.getElementsByClassName("chat_name")[0];
+            let newChatName = this.responseText.substring(0, this.responseText.indexOf("<>"));
+            console.log(newChatName)
+            let mes = document.getElementsByClassName("messages")[0];
+            let newMes = this.responseText.substring(this.responseText.indexOf("<>") + 2);
+            
+            if (chatName.innerText != newChatName){
+                chatName.innerText = newChatName;
+                let status = document.getElementsByClassName("chat_status")[0];
+                status.innerHTML = "";
+                document.getElementsByClassName("send_area")[0].style = "display: inline;";
+            }
+            if(mes.innerHTML != newMes){
+                console.log(newMes)
+                let top
                 top = mes.scrollTop;
-                bottom = mes.scrollHeight - mes.scrollTop === mes.clientHeight;
-            }
-            
-            let chat = document.getElementsByClassName("chat")[0]
-            chat.innerHTML = this.responseText
-            document.getElementsByClassName("send_area")[0].style.display = "inline";
-            
+                bottom = mes.scrollHeight - mes.scrollTop <= mes.clientHeight;
+                console.log(`Top: ${top}\nscrollHeight: ${mes.scrollHeight}\nclientHeight: ${mes.clientHeight}`)
 
-            if(mes){
-                mes = document.getElementsByClassName("messages")[0]
-                mes.scrollTop = top 
+                if (newMes.startsWith(mes.innerHTML)){
+                    mes.innerHTML += newMes.substring(mes.innerHTML.length);
+                }
+                else{
+                    mes.innerHTML = newMes;
+                }
+                
+                // document.getElementsByClassName("send_area")[0].style.display = "inline";
+                // if(getInChatCookie()){
+                //     let message_area = document.getElementById("message_text_area");
+                //     message_area.focus();
+                // } 
+
+
+                // if(mes){
+                //     mes = document.getElementsByClassName("messages")[0]
+                //     mes.scrollTop = top 
+                // }
+                if (bottom){
+                    scrollToBottom()
+                }
             }
-            if (bottom){
-                scrollToBottom()
-            }
-            if(getInChatCookie()){
-                let message_area = document.getElementById("message_text_area");
-                message_area.focus();
-            } 
         }
     }
     xhttp.open("GET", `${back_url}getChat?channel_id=${channel_id}&workplace_id=${getWorkplaceCookie()}&session=${getSession()}`);
@@ -91,19 +117,22 @@ function getChat(channel_id, bottom = false){
 
 // sends message
 function sendMessage(){
-    text = document.getElementById("message_text_area").value;
+    
+    textElem = document.getElementById("message_text_area");
+    text = textElem.value.trim();
     if (text == "") return
-
+    textElem.innerHTML = "";
+    
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         if(this.responseText == "Bad session code"){
-            let chat = document.getElementsByClassName("chat")[0]
-            chat.innerHTML = "<h4>Try to log in!</h4>"
+            let status = document.getElementsByClassName("chat_status")[0];
+            status.innerText = "Try to log in!";
             autoLogin()
         }
         else if(this.responseText == "No access"){
-            let chat = document.getElementsByClassName("chat")[0]
-            chat.innerHTML = "<h4>You haven`t access to this chat🫤</h4>"
+            let status = document.getElementsByClassName("chat_status")[0];
+            status.innerText = "You haven`t access to this chat";
         }
         else if(this.responseText == "Success"){
             getChat(getChannelCookie(), true)
