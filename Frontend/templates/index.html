@@ -7,7 +7,8 @@
     <title>TR Chat</title>
     <!-- Styles -->
     <link rel="stylesheet" href = "/resource?name=index.css">
-    <link rel="stylesheet" href = "/resource?name=header_and_loginner.css">
+    <link rel="stylesheet" href = "/resource?name=header.css">
+    <link rel="stylesheet" href = "/resource?name=loginner.css">
 </head>
 <body>
     <!-- workplaces -->
@@ -64,7 +65,7 @@
         <div class="acc_panel">
             <input class="with_bottom_border" type="button" value="Profile">
             <input class="with_bottom_border" type="button" value="Notification">
-            <input type="button" value="Log Out" onclick="deleteSession()">
+            <input type="button" value="Log Out" onclick="logOut()">
         </div>
    </header>
     <!-- loginer -->
@@ -174,6 +175,10 @@
     </div>
 </body>
 <!-- Scripts -->
+<script src="/resource?name=header.js"></script>
+<script src="/resource?name=loginner.js"></script>
+<script src="/resource?name=cookieManager.js"></script>
 <script src="/resource?name=index.js"></script>
-<script src="/resource?name=header_and_loginner.js"></script>
+<script src="/resource?name=indexPanels.js"></script>
+<script src="/resource?name=indexOnLoad.js"></script>
 </html>
