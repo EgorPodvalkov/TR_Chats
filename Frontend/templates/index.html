@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TR Chat</title>
     <!-- Styles -->
-    <link rel="stylesheet" href = "/resource?name=index.css">
-    <link rel="stylesheet" href = "/resource?name=header.css">
-    <link rel="stylesheet" href = "/resource?name=loginner.css">
+    <link rel="stylesheet" href = "/get?type=sty&name=index.css">
+    <link rel="stylesheet" href = "/get?type=sty&name=header.css">
+    <link rel="stylesheet" href = "/get?type=sty&name=loginner.css">
 </head>
 <body>
     <!-- workplaces -->
@@ -49,15 +49,15 @@
     </div>
     <div class="send_area">
         <input id="message_text_area" type="text">
-        <button onclick="sendMessage()"><img src="/resource?name=send.png" alt="Send"></button>
+        <button onclick="sendMessage()"><img src="/get?type=res&name=send.png" alt="Send"></button>
     </div>
    
     <!-- header -->
     <header-shadow></header-shadow><header>
         <a href="/">
-            <img class="logo" src = "/resource?name=logo_without_background.png" alt="logo">
+            <img class="logo" src = "/get?type=res&name=logo_without_background.png" alt="logo">
         </a>
-        <img class="avatar" id = "avatar_in_header" src="/avatar?name=default_avatar2.png" alt="avatar" onclick="show_acc_panel()">
+        <img class="avatar" id = "avatar_in_header" src="/get?type=ava&name=default_avatar2.png" alt="avatar" onclick="show_acc_panel()">
         <div class="buttons" id = "log_in_buttons">
             <input class="log" type="button" value="Log in" onclick="show_login_panel()">
             <input class="sign" type="button" value="Sign up" onclick="show_signup_panel()">
@@ -175,10 +175,10 @@
     </div>
 </body>
 <!-- Scripts -->
-<script src="/resource?name=header.js"></script>
-<script src="/resource?name=loginner.js"></script>
-<script src="/resource?name=cookieManager.js"></script>
-<script src="/resource?name=index.js"></script>
-<script src="/resource?name=indexPanels.js"></script>
-<script src="/resource?name=indexOnLoad.js"></script>
+<script src="/get?type=scr&name=header.js"></script>
+<script src="/get?type=scr&name=loginner.js"></script>
+<script src="/get?type=scr&name=cookieManager.js"></script>
+<script src="/get?type=scr&name=index.js"></script>
+<script src="/get?type=scr&name=indexPanels.js"></script>
+<script src="/get?type=scr&name=indexOnLoad.js"></script>
 </html>

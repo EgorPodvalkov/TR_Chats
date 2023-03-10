@@ -66,11 +66,11 @@ function getChat(channel_id, bottom = false){
                 top = mes.scrollTop;
                 bottom = mes.scrollHeight - mes.scrollTop === mes.clientHeight;
             }
-            
+
             let chat = document.getElementsByClassName("chat")[0]
             chat.innerHTML = this.responseText
             document.getElementsByClassName("send_area")[0].style.display = "inline";
-            
+
 
             if(mes){
                 mes = document.getElementsByClassName("messages")[0]
@@ -82,7 +82,7 @@ function getChat(channel_id, bottom = false){
             if(getInChatCookie()){
                 let message_area = document.getElementById("message_text_area");
                 message_area.focus();
-            } 
+            }
         }
     }
     xhttp.open("GET", `${back_url}getChat?channel_id=${channel_id}&workplace_id=${getWorkplaceCookie()}&session=${getSession()}`);
@@ -93,7 +93,7 @@ function getChat(channel_id, bottom = false){
 function sendMessage(){
     text = document.getElementById("message_text_area").value;
     if (text == "") return
-
+    
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         if(this.responseText == "Bad session code"){
