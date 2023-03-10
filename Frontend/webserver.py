@@ -20,35 +20,62 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/resource")
+@app.route("/get")
 def get_resource():
-    '''Gives files to server'''
+    '''Gives files to server (res, ava, scr, sty)'''
+    file_type = request.args.get("type")
     file_name = request.args.get("name")
-    file_path = path + "resources\\" + file_name
 
-    try:
-        resource = send_file(file_path)
-        log(f"File [green]{file_name}[/green] is loaded! ")
-        return resource
-    except:
-        log(f"File [red]{file_name}[/red] not founded :(")
+    # checking only 3 first symbols of type
+    if len(file_type) > 3:
+        file_type = file_type[:3]
+
+    # type checking
+    TYPES = ["res", "ava", "scr", "sty"]
+    if file_type not in TYPES:
+        log(f"File type of [red]{file_name}[/red] not founded :(")
         return generateResponse()
 
+    match file_type:
+        # resourses
+        case "res":
+            try:
+                file = send_file(path + "resources\\" + file_name)
+                log(f"File [green]{file_name}[/green] is loaded! ")
+                return file
+            except:
+                file = send_file(path + "resources\\no_img.png")
+                log(f"File [red]{file_name}[/red] not founded :(")
+                return file
+        # avatars
+        case "ava":
+            try:
+                file = send_file(path + "resources\\avatars\\" + file_name)
+                log(f"Avatar [green]{file_name}[/green] is loaded! ")
+                return file
+            except:
+                file = send_file(path + "resources\\no_img.png")
+                log(f"Avatar [red]{file_name}[/red] not founded :(")
+                return file
+        # scripts
+        case "scr":
+            try:
+                file = send_file(path + "scripts\\" + file_name)
+                log(f"Script [green]{file_name}[/green] is loaded! ")
+                return file
+            except:
+                log(f"Script [red]{file_name}[/red] not founded :(")
+                return generateResponse()
+        # style
+        case "sty":
+            try:
+                file = send_file(path + "styles\\" + file_name)
+                log(f"Style [green]{file_name}[/green] is loaded! ")
+                return file
+            except:
+                log(f"Style [red]{file_name}[/red] not founded :(")
+                return generateResponse()
 
-@app.route("/avatar")
-def get_avatar():
-    '''Gives avatars to server'''
-    file_name = request.args.get("name")
-    file_path = path + "resources\\avatars\\" + file_name
-
-    try:
-        resource = send_file(file_path)
-        log(f"Avatar [green]{file_name}[/green] is loaded! ")
-        return resource
-    except:
-        log(f"Avatar [red]{file_name}[/red] not founded :(")
-        return generateResponse()
-    
 
 @app.route("/joinWorkplace")
 def join():
@@ -56,5 +83,6 @@ def join():
     workplace_id = request.args.get("workplace_id")
 
     return render_template("join.html", workplace_id = workplace_id)
+
 
 app.run(host="0.0.0.0", port=8080, debug=True)

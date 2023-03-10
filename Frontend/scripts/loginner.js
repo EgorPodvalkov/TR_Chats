@@ -360,7 +360,6 @@ function autoLogin(){
                 getChannels(getWorkplaceCookie());
                 let status = document.getElementsByClassName("chat_status")[0]
                 status.innerHTML = "Choose Channel to start chatting"
-
             }
         }
 
