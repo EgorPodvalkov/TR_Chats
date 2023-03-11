@@ -149,11 +149,5 @@ function sendMessage(){
 function scrollToBottom(){
     element = document.getElementsByClassName("messages")[0]
     element.scrollTop = element.scrollHeight
+    document.getElementById("to_bottom_button").style.display = "none";
 }
-
-// sends messages on Enter button
-document.addEventListener("keydown", function(event) {
-    if (event.code === "Enter") {
-      sendMessage();
-    }
-});

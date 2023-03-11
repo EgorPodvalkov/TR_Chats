@@ -208,6 +208,17 @@ div.chat > .chat_area{
     border-top: 3px solid rgb(19, 18, 18, 0.8);
     display: none;
 }
+.send_area > #to_bottom_button{
+    position: absolute;
+    right: 15px;
+    top: -55px;
+    background-color: transparent;
+    border: 0;
+}
+.send_area > #to_bottom_button > img{
+    border-radius: 20px;
+    width: 40px;
+}
 .send_area > input{
     margin-top: 20px;
     margin-left: 15px;
@@ -218,7 +229,7 @@ div.chat > .chat_area{
     border: 0;
     border-radius: 8px;
 }
-.send_area > button{
+.send_area > #send_button{
     position: absolute;
     right: 10px;
     margin-top: 10px;
